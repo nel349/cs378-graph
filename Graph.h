@@ -73,9 +73,24 @@ class Graph {
         }
 
 
-        // friend void printEdges(Graph& g){
+        friend void printEdges(Graph& g){
+            for ( auto it = g.edges.begin(); it != g.edges.end(); ++it ){
+                cout << "edge: " << it->first << " (" << it->second.first << " , "<< it->second.second << ")" << endl;
+            }
+        }
 
-        // }
+
+        friend void printGraph(Graph& g){
+            for ( auto vertex = g.graph.begin(); vertex != g.graph.end(); ++vertex ){
+                cout << "vertex: " << vertex->first << "(";
+                vector<vertex_descriptor> adjl = vertex->second;
+                for(vertex_descriptor x : adjl){
+                    cout << " " << x ;
+                }
+                cout << " )" << endl;
+
+            }
+        }
 
 
         // --------
@@ -85,11 +100,45 @@ class Graph {
         /**
          * <your documentation>
          */
-        friend std::pair<edge_descriptor, bool> add_edge (vertex_descriptor, vertex_descriptor, Graph&) {
-            // <your code>
-            edge_descriptor ed = 0;
-            bool            b  = false;
-            return std::make_pair(ed, b);}
+        friend std::pair<edge_descriptor, bool> add_edge (vertex_descriptor a, vertex_descriptor b, Graph& g) {
+
+
+
+
+            edge_descriptor ed = g.eid;
+            bool            add_edge  = true;
+            for ( auto it = g.edges.begin(); it != g.edges.end(); ++it ){
+                if( (it->second.first  == a && it->second.second == b) ||
+                    (it->second.first  == b && it->second.second == a) )  {
+                    add_edge= false;
+                }
+            }
+            if(add_edge){
+                ++g.eid;
+                g.edges[ed] = make_pair(a,b);
+                if(g.graph.find(a) == g.graph.end()){
+                    g.graph[a] = {};
+                    g.graph[a].push_back(b);
+                }
+                else{
+                    g.graph[a].push_back(b);
+                }
+                
+                if(g.graph.find(b) == g.graph.end()){
+                    g.graph[b] = {};
+                    g.graph[b].push_back(a);
+
+
+                }
+                else{
+                    g.graph[b].push_back(a);
+                }
+            }
+            else{
+                 // cout << "Edge : " << g.eid << " already exist" << endl;
+            }
+            
+            return std::make_pair(ed, add_edge);}
 
         // ----------
         // add_vertex
@@ -231,6 +280,9 @@ class Graph {
         bool valid () const {
             // <your code>
             return true;}
+
+        bool valid (vertex_descriptor& a, vertex_descriptor& b) const {
+            return vertices.find(a) != vertices.end() && vertices.find(b) != vertices.end();}
 
     public:
         // ------------

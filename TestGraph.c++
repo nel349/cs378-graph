@@ -266,12 +266,32 @@ TYPED_TEST(TestGraph, Vertex) {
     typedef typename TestFixture::vertices_size_type vertices_size_type;
     typedef typename TestFixture::edges_size_type    edges_size_type;
 
-    graph_type g;
+    // graph_type g;
+    Graph g;
 
-    vertex_descriptor vdA = add_vertex(g);
-    vertex_descriptor vdB = add_vertex(g);
+    vertex_descriptor vdA0 = add_vertex(g);
+    vertex_descriptor vdA1 = add_vertex(g);
+    vertex_descriptor vdA2 = add_vertex(g);
+    vertex_descriptor vdA3 = add_vertex(g);
+    vertex_descriptor vdA4 = add_vertex(g);
+    vertex_descriptor vdA5 = add_vertex(g);
+    vertex_descriptor vdA6 = add_vertex(g);
 
-    edge_descriptor edAB = add_edge(vdA, vdB, g).first;
+    add_edge(vdA0, vdA1, g); //0 edge
+    add_edge(vdA1, vdA4, g);//1 edge
+    add_edge(vdA2, vdA3, g);//2 edge
+    add_edge(vdA3, vdA6, g);//3 edge
+    add_edge(vdA5, vdA6, g);//4 edge
+
+    add_edge(vdA5, vdA6, g);// Already Exist!
+
+    // std::pair<edge_descriptor, bool> p2 = edge(vdA5, vdA6, g);
+    // ASSERT_EQ(4, p2.first);
+    // ASSERT_EQ(false, p2.second);
+
+    // printEdges(g);
+
+    printGraph(g); //prints adjacency list
 
 }
 

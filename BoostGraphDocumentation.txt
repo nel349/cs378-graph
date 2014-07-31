@@ -1,0 +1,12 @@
+Boost Graph Documentation
+
+std::pair<edge_descriptor, bool> add_edge(vertex_descriptor u, vertex_descriptor v, adjacency_list& g)
+	Adds edge (u,v) to the graph and returns the edge descriptor for the new edge. For graphs that do not allow parallel edges, if the edge is already in the graph then a duplicate will not be added and the bool flag will be false. When the flag is false, the returned edge descriptor points to the already existing edge.
+	The placement of the new edge in the out-edge list is in general unspecified, though ordering of the out-edge list can be accomplished through the choice of OutEdgeList. If the VertexList selector is vecS, and if either vertex descriptor u or v (which are integers) has a value greater than the current number of vertices in the graph, the graph is enlarged so that the number of vertices is std::max(u,v) + 1.
+
+	If the OutEdgeList selector is vecS then this operation will invalidate any out_edge_iterator for vertex u. This also applies if the OutEdgeList is a user-defined container that invalidates its iterators when push(container, x) is invoked (see Section Customizing the Adjacency List Storage). If the graph is also bidirectional then any in_edge_iterator for v is also invalidated. If instead the graph is undirected then any out_edge_iterator for v is also invalidated. If instead the graph is directed, then add_edge() also invalidates any edge_iterator.
+
+
+
+std::pair<edge_descriptor, bool> edge(vertex_descriptor u, vertex_descriptor v, const adjacency_list& g)
+If an edge from vertex u to vertex v exists, return a pair containing one such edge and true. If there are no edges between undirected and v, return a pair with an arbitrary edge descriptor and false.
