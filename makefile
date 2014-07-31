@@ -6,7 +6,6 @@ clean:
 	rm -f  *.gcov
 	rm -f  Graph.log
 	rm -f  TestGraph
-	rm -f  TestGraph.out
 	rm -rf html
 
 config:
