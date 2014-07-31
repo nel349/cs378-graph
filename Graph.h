@@ -15,18 +15,24 @@
 #include <cstddef> // size_t
 #include <utility> // make_pair, pair
 #include <vector>  // vector
+#include <unordered_map> // unordered map
+#include <iostream>
+using namespace std;
+
 
 // -----
 // Graph
 // -----
 
 class Graph {
+
+
     public:
         // --------
         // typedefs
         // --------
 
-        typedef int vertex_descriptor;  // fix!
+        typedef int vertex_descriptor   ;  // fix!
         typedef int edge_descriptor;    // fix!
 
         typedef int* vertex_iterator;    // fix!
@@ -36,7 +42,42 @@ class Graph {
         typedef std::size_t vertices_size_type;
         typedef std::size_t edges_size_type;
 
+
+     private:
+        // ----
+        // data
+        // ----
+
+        // std::vector< std::vector<vertex_descriptor> > g; // something like this
+
+        unordered_map< vertex_descriptor, vector<vertex_descriptor> > graph;
+        unordered_map< vertices_size_type, vertex_descriptor> vertices; // vertices and its edges
+
+        unordered_map< edge_descriptor, pair<vertex_descriptor, vertex_descriptor> > edges; // edges
+
+        vertex_descriptor vid;
+        edge_descriptor eid;    
+
     public:
+
+        //HELPFUL Functions
+
+        friend void printVertices(Graph& g){
+           for ( auto it = g.vertices.begin(); it != g.vertices.end(); ++it )
+                cout << " " << it->first << ":" << it->second;
+        
+            cout << endl;
+
+            // cout << "Is this failing" << endl;
+
+        }
+
+
+        // friend void printEdges(Graph& g){
+
+        // }
+
+
         // --------
         // add_edge
         // --------
@@ -57,9 +98,11 @@ class Graph {
         /**
          * <your documentation>
          */
-        friend vertex_descriptor add_vertex (Graph&) {
-            // <your code>
-            vertex_descriptor v = 0; // fix
+        friend vertex_descriptor add_vertex (Graph& g) {
+
+            g.vertices[(vertices_size_type)g.vid] = g.vid;
+            vertex_descriptor v  =  g.vid;       
+            ++g.vid;
             return v;}
 
         // -----------------
@@ -122,9 +165,8 @@ class Graph {
         /**
          * <your documentation>
          */
-        friend vertices_size_type num_vertices (const Graph&) {
-            // <your code>
-            vertices_size_type s = 1; // fix
+        friend vertices_size_type num_vertices (const Graph& g) {
+            vertices_size_type s = g.vertices.size(); // fix
             return s;}
 
         // ------
@@ -158,9 +200,9 @@ class Graph {
         /**
          * <your documentation>
          */
-        friend vertex_descriptor vertex (vertices_size_type, const Graph&) {
-            // <your code>
-            vertex_descriptor vd = 0; // fix
+        friend vertex_descriptor vertex (vertices_size_type n, const Graph& g) {
+            auto it_vd = g.vertices.find(n);
+            vertex_descriptor vd = it_vd -> second;  // fix
             return vd;}
 
         // --------
@@ -177,12 +219,7 @@ class Graph {
             vertex_iterator e = a + 2;
             return std::make_pair(b, e);}
 
-    private:
-        // ----
-        // data
-        // ----
-
-        std::vector< std::vector<vertex_descriptor> > g; // something like this
+   
 
         // -----
         // valid
@@ -204,13 +241,25 @@ class Graph {
          * <your documentation>
          */
         Graph () {
-            // <your code>
+
+            graph={};
+            vertices={};
+            edges={};
+
+            vid = 0;
+            eid = 0;
+
             assert(valid());}
 
         // Default copy, destructor, and copy assignment
         // Graph  (const Graph<T>&);
         // ~Graph ();
         // Graph& operator = (const Graph&);
+
+
+
     };
+
+
 
 #endif // Graph_h
