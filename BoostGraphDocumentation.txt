@@ -10,3 +10,9 @@ std::pair<edge_descriptor, bool> add_edge(vertex_descriptor u, vertex_descriptor
 
 std::pair<edge_descriptor, bool> edge(vertex_descriptor u, vertex_descriptor v, const adjacency_list& g)
 If an edge from vertex u to vertex v exists, return a pair containing one such edge and true. If there are no edges between undirected and v, return a pair with an arbitrary edge descriptor and false.
+
+std::pair<vertex_iterator, vertex_iterator> vertices(const adjacency_list& g)
+Returns an iterator-range providing access to the vertex set of graph g.
+
+std::pair<edge_iterator, edge_iterator> edges(const adjacency_list& g)
+Returns an iterator-range providing access to the edge set of graph g.
