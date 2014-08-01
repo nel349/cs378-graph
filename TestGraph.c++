@@ -490,39 +490,40 @@ TYPED_TEST(TestGraph, vertex_iterator_edges_1) {
 
 }
 
-// TYPED_TEST(TestGraph, Edge) {
-//     typedef typename TestFixture::graph_type         graph_type;
-//     typedef typename TestFixture::vertex_descriptor  vertex_descriptor;
-//     typedef typename TestFixture::edge_descriptor    edge_descriptor;
-//     typedef typename TestFixture::vertex_iterator    vertex_iterator;
-//     typedef typename TestFixture::edge_iterator      edge_iterator;
-//     typedef typename TestFixture::adjacency_iterator adjacency_iterator;
-//     typedef typename TestFixture::vertices_size_type vertices_size_type;
-//     typedef typename TestFixture::edges_size_type    edges_size_type;
+TYPED_TEST(TestGraph, Edge) {
+    typedef typename TestFixture::graph_type         graph_type;
+    typedef typename TestFixture::vertex_descriptor  vertex_descriptor;
+    typedef typename TestFixture::edge_descriptor    edge_descriptor;
+    typedef typename TestFixture::vertex_iterator    vertex_iterator;
+    typedef typename TestFixture::edge_iterator      edge_iterator;
+    typedef typename TestFixture::adjacency_iterator adjacency_iterator;
+    typedef typename TestFixture::vertices_size_type vertices_size_type;
+    typedef typename TestFixture::edges_size_type    edges_size_type;
 
-//     graph_type g;
+    graph_type g;
 
-//     vertex_descriptor vdA = add_vertex(g);
-//     vertex_descriptor vdB = add_vertex(g);
+    vertex_descriptor vdA = add_vertex(g);
+    vertex_descriptor vdB = add_vertex(g);
 
-//     edge_descriptor edAB = add_edge(vdA, vdB, g).first;
+    edge_descriptor edAB = add_edge(vdA, vdB, g).first;
 
-//     std::pair<edge_descriptor, bool> p1 = add_edge(vdA, vdB, g);
-//     ASSERT_EQ(edAB,  p1.first);
-//     ASSERT_EQ(false, p1.second);
+    std::pair<edge_descriptor, bool> p1 = add_edge(vdA, vdB, g);
+    ASSERT_EQ(edAB,  p1.first);
+    ASSERT_EQ(false, p1.second);
 
-//     std::pair<edge_descriptor, bool> p2 = edge(vdA, vdB, g);
-//     ASSERT_EQ(edAB, p2.first);
-//     ASSERT_EQ(true, p2.second);
+    std::pair<edge_descriptor, bool> p2 = edge(vdA, vdB, g);
+    ASSERT_EQ(edAB, p2.first);
+    ASSERT_EQ(true, p2.second);
 
-//     edges_size_type es = num_edges(g);
-//     ASSERT_EQ(1, es);
+    edges_size_type es = num_edges(g);
+    ASSERT_EQ(1, es);
 
-//     vertex_descriptor vd1 = source(edAB, g);
-//     ASSERT_EQ(vdA, vd1);
+    // vertex_descriptor vd1 = source(edAB, g);
+    // ASSERT_EQ(vdA, vd1);
 
-//     vertex_descriptor vd2 = target(edAB, g);
-//     ASSERT_EQ(vdB, vd2);}
+    // vertex_descriptor vd2 = target(edAB, g);
+    // ASSERT_EQ(vdB, vd2);
+}
 
 // TYPED_TEST(TestGraph, Vertices) {
 //     typedef typename TestFixture::graph_type         graph_type;

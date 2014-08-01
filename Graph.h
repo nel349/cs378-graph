@@ -110,7 +110,6 @@ class Graph {
                 if( (it->second.first  == a && it->second.second == b) ||
                     (it->second.first  == b && it->second.second == a) )  {
                     add_edge= false;
-                    // cout << a << " "<< b<<"Edge not added" << endl;
                 }
             }
             if(add_edge){
@@ -136,7 +135,8 @@ class Graph {
                 }
             }
             else{
-                 // cout << "Edge : " << g.eid << " already exist" << endl;
+                std::pair<edge_descriptor, bool> found =edge(a, b, g); 
+                ed = found.first;      
             }
             
             return std::make_pair(ed, add_edge);}
