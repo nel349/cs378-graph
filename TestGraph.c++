@@ -44,6 +44,7 @@ To obtain coverage of the test:
 
 #include "boost/graph/adjacency_list.hpp"  // adjacency_list
 #include "boost/graph/topological_sort.hpp"// topological_sort
+#include <typeinfo> 
 
 #include "gtest/gtest.h"
 
@@ -423,6 +424,69 @@ TYPED_TEST(TestGraph, vertex_iterator_vertices) {
     // printEdges(g);
 
     // printGraph(g); //prints adjacency list
+
+}
+
+
+TYPED_TEST(TestGraph, vertex_iterator_edges_1) {
+    typedef typename TestFixture::graph_type         graph_type;
+    typedef typename TestFixture::vertex_descriptor  vertex_descriptor;
+    typedef typename TestFixture::edge_descriptor    edge_descriptor;
+    typedef typename TestFixture::vertex_iterator    vertex_iterator;
+    typedef typename TestFixture::edge_iterator      edge_iterator;
+    typedef typename TestFixture::adjacency_iterator adjacency_iterator;
+    typedef typename TestFixture::vertices_size_type vertices_size_type;
+    typedef typename TestFixture::edges_size_type    edges_size_type;
+
+    // graph_type g;
+    Graph g;
+
+    vertex_descriptor vdA0 = add_vertex(g);
+    vertex_descriptor vdA1 = add_vertex(g);
+    vertex_descriptor vdA2 = add_vertex(g);
+    vertex_descriptor vdA3 = add_vertex(g);
+    vertex_descriptor vdA4 = add_vertex(g);
+    vertex_descriptor vdA5 = add_vertex(g);
+    vertex_descriptor vdA6 = add_vertex(g);
+
+    // edge_descriptor e0 = add_edge(vdA0, vdA1, g).first; //0 edge
+    // edge_descriptor e1 = add_edge(vdA1, vdA4, g).first;//1 edge
+    // edge_descriptor e2 = add_edge(vdA2, vdA3, g).first;//2 edge
+    // edge_descriptor e3 = add_edge(vdA3, vdA6, g).first;//3 edge
+    // edge_descriptor e4 = add_edge(vdA5, vdA6, g).first;//4 edge
+
+    add_edge(vdA0, vdA1, g); //0 edge
+    add_edge(vdA1, vdA4, g);//1 edge
+    add_edge(vdA2, vdA3, g);//2 edge
+    add_edge(vdA3, vdA6, g);//3 edge
+    add_edge(vdA5, vdA6, g);//4 
+
+    add_edge(vdA5, vdA6, g);// Already Exist!
+
+    ASSERT_EQ(5, num_edges(g));
+
+    add_edge(vdA1, vdA6, g);
+    ASSERT_EQ(6, num_edges(g));
+
+    auto  b = edges(g).first;
+    auto  e = edges(g).second;
+
+
+    // cout << *b++ << endl;
+
+
+
+    vertex_descriptor i =0;
+    // cout << "MY EDGES" << endl;
+    while( b != e ){
+        // cout <<*b<< " " ; 
+        ASSERT_EQ(i, *b);
+
+        ++b;
+        ++i;
+    }
+        cout << endl;
+
 
 }
 

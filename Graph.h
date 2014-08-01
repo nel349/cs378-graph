@@ -38,7 +38,7 @@ class Graph {
         typedef int edge_descriptor;    // fix!
 
         // typedef int* vertex_iterator;    // fix!
-        typedef int* edge_iterator;      // fix!
+        // typedef int* edge_iterator;      // fix!
         typedef int* adjacency_iterator; // fix!
 
         typedef std::size_t vertices_size_type;
@@ -110,11 +110,13 @@ class Graph {
                 if( (it->second.first  == a && it->second.second == b) ||
                     (it->second.first  == b && it->second.second == a) )  {
                     add_edge= false;
+                    // cout << a << " "<< b<<"Edge not added" << endl;
                 }
             }
             if(add_edge){
                 ++g.eid;
                 g.edges[ed] = make_pair(a,b);
+                // cout << "Added edge " << ed <<endl;
                 if(g.graph.find(a) == g.graph.end()){
                     g.graph[a] = {};
                     g.graph[a].push_back(b);
@@ -187,19 +189,7 @@ class Graph {
             }
             return std::make_pair(ed, exist);}
 
-        // -----
-        // edges
-        // -----
-
-        /**
-         * <your documentation>
-         */
-        friend std::pair<edge_iterator, edge_iterator> edges (const Graph&) {
-            // <your code>
-            static int a [] = {0, 0};     // dummy data
-            edge_iterator b = a;
-            edge_iterator e = a + 2;
-            return std::make_pair(b, e);}
+       
 
         // ---------
         // num_edges
@@ -262,8 +252,6 @@ class Graph {
         // --------
         // vertices
         // --------
-
-
         public:
             class vertex_iterator{
            public:
@@ -356,8 +344,8 @@ class Graph {
                 /**
                  * <your documentation>
                  */
-                // pointer operator -> () const {
-                //     return &**this;}
+                vertex_descriptor* operator -> () const {
+                    return &**this;}
 
                 // -----------
                 // operator ++
@@ -410,11 +398,11 @@ class Graph {
                  * @return const_iterator reference
                  * adds d to iterator
                  */
-                // vertex_iterator& operator += (iterator_traits::difference_type d) {
+                vertex_iterator& operator += (vertices_size_type d) {
 
-                //     index += d;
-                //     assert(valid());
-                //     return *this;}
+                    index += d;
+                    assert(valid());
+                    return *this;}
 
                 // -----------
                 // operator -=
@@ -426,33 +414,176 @@ class Graph {
                  * @return const_iterator reference
                  * subtracts d from iterator
                  */
-                // vertex_iterator& operator -= (iterator_traits::difference_type d) {
-                //     index -= d
-                //     assert(valid());
-                //     return *this;}};
+                vertex_iterator& operator -= (vertices_size_type d) {
+                    index -= d;
+                    assert(valid());
+                    return *this;
+                }
     
 
 
             };
 
+
+        // --------
+        // Edges iterator
+        // --------
         public:
-            class const_iterator{
+            class edge_iterator{
+           public:
+                // --------
+                // typedefs
+                // --------
 
-                const_iterator(){
+                // typedef std::bidirectional_iterator_tag   iterator_category;
+                // typedef typename Graph::value_type      value_type;
+                // typedef typename Graph::difference_type difference_type;
+                // typedef typename &*edge_descriptor               reference;
+                // typedef typename Graph::edge_iterator                         reference;
+// 
+                // typedef typename Graph::edge_iterator*                         pointer;
 
+                typedef typename Graph::edges_size_type           size_type;
+
+            public:
+                // -----------
+                // operator ==
+                // -----------
+
+                /**
+                 * <your documentation>
+                 */
+                friend bool operator == (const edge_iterator& lhs, const edge_iterator& rhs) {
+                    return lhs._c == rhs._c && lhs.index == rhs.index;
                 }
+
+                /**
+                 * <your documentation>
+                 */
+                friend bool operator != (const edge_iterator& lhs, const edge_iterator& rhs) {
+                    return !(lhs == rhs);}
+
+
+
+            private:
+                // ----
+                // data
+                // ----
+                // <your data>
+
+                Graph* _c;
+                size_type index;
+
+            private:
+                // -----
+                // valid
+                // -----
+
+                bool valid () const {
+                    return index >= 0;}
+
+            public:
+                // -----------
+                // constructor
+                // -----------
+
+                /**
+                 * <your documentation>
+                 */
+                edge_iterator (Graph* c, size_type i = 0) : _c(c), index(0){
+
+                    index = i;
+
+                    assert(valid());
+                }
+
+                // Default copy, destructor, and copy assignment.
+                // iterator (const iterator&);
+                // ~iterator ();
+                // iterator& operator = (const iterator&);
+
+                // ----------
+                // operator *
+                // ----------
+
+                /**
+                 * <your documentation>
+                 */
+                edge_descriptor operator * () const {
+
+                    edge_descriptor d = index;
+
+                    return d;
+                }
+
+
+
+                // -----------
+                // operator ++
+                // -----------
+
+                /**
+                 * <your documentation>
+                 */
+                edge_iterator& operator ++ () {
+                    // ++(*this);
+                    ++index;
+                    assert(valid());
+                    return *this;}
+
+                /**
+                 * <your documentation>
+                 */
+                edge_iterator operator ++ (int) {
+                    edge_iterator x = *this;
+                    ++(*this);
+                    assert(valid());
+                    return x;}
+
+
+
+                 /**
+                 * @param cosnt_iterator
+                 * @param value d
+                 * @return const_iterator reference
+                 * adds d to iterator
+                 */
+                edge_iterator& operator += (edges_size_type d) {
+
+                    index += d;
+                    assert(valid());
+                    return *this;}
+
+     
+    
+
+
             };
+
 
         /**
          * <your documentation>
-         */
-        friend std::pair<vertex_iterator, vertex_iterator> vertices ( Graph& g) {
+         */                                             //Ther ShOULD be a const version here!!!
+        friend std::pair<vertex_iterator, vertex_iterator> vertices ( Graph& g) {// <------------
             // <your code>
                 // dummy data
            
             vertex_iterator b = g.begin();
             vertex_iterator e = g.end();
             return std::make_pair(b, e);}
+
+
+        // -----
+        // edges
+        // -----
+
+        /**
+         * <your documentation>
+         */                                              //Ther ShOULD be a const version here!!!
+        friend std::pair<edge_iterator, edge_iterator> edges (Graph& g) { // <------------
+            edge_iterator b = g.edge_begin();
+            edge_iterator e = g.edge_end();
+            return std::make_pair(b, e);}            
 
 
         /**
@@ -467,7 +598,24 @@ class Graph {
          */
         vertex_iterator end () {
             return vertex_iterator(this, vertices.size());
-        }            
+        }      
+
+
+        /**
+         * <your documentation>
+         */
+        edge_iterator edge_begin () {
+            return edge_iterator(this, 0);
+        }
+
+        /**
+         * <your documentation>
+         */
+        edge_iterator edge_end () {
+            return edge_iterator(this, edges.size());
+        }    
+
+
 
    
 
