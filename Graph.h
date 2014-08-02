@@ -220,9 +220,8 @@ class Graph {
         /**
          * <your documentation>
          */
-        friend vertex_descriptor source (edge_descriptor, const Graph&) {
-            // <your code>
-            vertex_descriptor v = 0; // fix
+        friend vertex_descriptor source (edge_descriptor ed, const Graph& g) {
+            vertex_descriptor v =  g.edges.at(ed).first; 
             return v;}
 
         // ------
@@ -232,9 +231,9 @@ class Graph {
         /**
          * <your documentation>
          */
-        friend vertex_descriptor target (edge_descriptor, const Graph&) {
-            // <your code>
-            vertex_descriptor v = 0; // fix
+        friend vertex_descriptor target (edge_descriptor ed, const Graph& g) {
+
+                vertex_descriptor v = g.edges.at(ed).second;
             return v;}
 
         // ------
@@ -454,7 +453,7 @@ class Graph {
                  * <your documentation>
                  */
                 friend bool operator == (const edge_iterator& lhs, const edge_iterator& rhs) {
-                    return lhs._c == rhs._c && lhs.index == rhs.index;
+                    return *lhs == *rhs;
                 }
 
                 /**
@@ -511,9 +510,14 @@ class Graph {
                  */
                 edge_descriptor operator * () const {
 
-                    edge_descriptor d = index;
+                    // vertex_descriptor d = 0;
+                    // vertex_descriptor e = 0;
+                    edge_descriptor r = index; 
 
-                    return d;
+                    // cout << (m).first << " this " << (m).second << endl;
+
+
+                    return r;
                 }
 
 
