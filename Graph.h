@@ -599,7 +599,7 @@ class Graph {
                  * <your documentation>
                  */
                 friend bool operator == (const adjacency_iterator& lhs, const adjacency_iterator& rhs) {
-                    return *lhs == *rhs;
+                    return lhs._c == rhs._c && lhs.index == rhs.index && lhs._vd == rhs._vd;
                 }
 
                 /**
