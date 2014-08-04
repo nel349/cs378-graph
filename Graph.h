@@ -15,9 +15,10 @@
 #include <cstddef> // size_t
 #include <utility> // make_pair, pair
 #include <vector>  // vector
-#include <unordered_map> // unordered map
+#include <map> //  map
 #include <iostream>
 #include <memory>    // allocator
+#include <algorithm>
 
 using namespace std;
 
@@ -52,10 +53,10 @@ class Graph {
 
         // std::vector< std::vector<vertex_descriptor> > g; // something like this
 
-        unordered_map< vertex_descriptor, vector<vertex_descriptor> > graph;
-        unordered_map< vertices_size_type, vertex_descriptor> vertices; // vertices and its edges
+        map< vertex_descriptor, vector<vertex_descriptor> > graph;
+        map< vertices_size_type, vertex_descriptor> vertices; // vertices and its edges
 
-        unordered_map< edge_descriptor, pair<vertex_descriptor, vertex_descriptor> > edges; // edges
+        map< edge_descriptor, pair<vertex_descriptor, vertex_descriptor> > edges; // edges
 
         vertex_descriptor vid;
         edge_descriptor eid;    
@@ -94,6 +95,10 @@ class Graph {
             }
         }
 
+         bool less_second(const pair<vertex_descriptor, vertex_descriptor>& a, const pair<vertex_descriptor, vertex_descriptor>& b){
+
+            return true;
+        }
 
         // --------
         // add_edge
@@ -104,7 +109,7 @@ class Graph {
          */
         friend std::pair<edge_descriptor, bool> add_edge (vertex_descriptor a, vertex_descriptor b, Graph& g) {
 
-            edge_descriptor ed = g.eid;
+            edge_descriptor ed = (edge_descriptor)10 * a  + b;
             bool            add_edge  = true;
             for ( auto it = g.edges.begin(); it != g.edges.end(); ++it ){
                 if( (it->second.first  == a && it->second.second == b) ||
@@ -113,7 +118,10 @@ class Graph {
                 }
             }
             if(add_edge){
-                ++g.eid;
+                // ++g.eid;
+                // cout << 
+                
+                // cout << "this is ed:" << a* 10  + b << endl;
                 g.edges[ed] = make_pair(a,b);
                 // cout << "Added edge " << ed <<endl;
                 if(g.graph.find(a) == g.graph.end()){
@@ -138,8 +146,14 @@ class Graph {
                 std::pair<edge_descriptor, bool> found =edge(a, b, g); 
                 ed = found.first;      
             }
-            
-            return std::make_pair(ed, add_edge);}
+            // sort(g.edges.begin(), g.edges.end(), less_second);
+
+
+            return std::make_pair(ed, add_edge);
+        }
+
+
+
 
         // ----------
         // add_vertex
@@ -509,14 +523,14 @@ class Graph {
                  * <your documentation>
                  */
                 edge_descriptor operator * () const {
-
-                    // vertex_descriptor d = 0;
-                    // vertex_descriptor e = 0;
-                    edge_descriptor r = index; 
-
-                    // cout << (m).first << " this " << (m).second << endl;
-
-
+                    edge_descriptor r =0;
+                    size_type i =0;
+                    auto it = (*_c).edges.begin();
+                    while(  i < index ){
+                        ++i;
+                        ++it;
+                    }
+                    r= it->first;
                     return r;
                 }
 
@@ -530,7 +544,6 @@ class Graph {
                  * <your documentation>
                  */
                 edge_iterator& operator ++ () {
-                    // ++(*this);
                     ++index;
                     assert(valid());
                     return *this;}
