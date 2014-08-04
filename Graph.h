@@ -40,7 +40,7 @@ class Graph {
 
         // typedef int* vertex_iterator;    // fix!
         // typedef int* edge_iterator;      // fix!
-        typedef int* adjacency_iterator; // fix!
+        // typedef int* adjacency_iterator; // fix!
 
         typedef std::size_t vertices_size_type;
         typedef std::size_t edges_size_type;
@@ -168,19 +168,7 @@ class Graph {
             ++g.vid;
             return v;}
 
-        // -----------------
-        // adjacent_vertices
-        // -----------------
-
-        /**
-         * <your documentation>
-         */
-        friend std::pair<adjacency_iterator, adjacency_iterator> adjacent_vertices (vertex_descriptor, const Graph&) {
-            // <your code>
-            static int a [] = {0, 0};     // dummy data
-            adjacency_iterator b = a;
-            adjacency_iterator e = a + 2;
-            return std::make_pair(b, e);}
+        
 
         // ----
         // edge
@@ -578,6 +566,140 @@ class Graph {
             };
 
 
+
+
+             // --------
+        // Edges iterator
+        // --------
+        public:
+            class adjacency_iterator{
+           public:
+                // --------
+                // typedefs
+                // --------
+
+                // typedef std::bidirectional_iterator_tag   iterator_category;
+                // typedef typename Graph::value_type      value_type;
+                // typedef typename Graph::difference_type difference_type;
+                // typedef typename &*edge_descriptor               reference;
+                // typedef typename Graph::edge_iterator                         reference;
+// 
+                // typedef typename Graph::edge_iterator*                         pointer;
+
+                typedef typename Graph::vertices_size_type           size_type;
+
+            public:
+                // -----------
+                // operator ==
+                // -----------
+
+                /**
+                 * <your documentation>
+                 */
+                friend bool operator == (const adjacency_iterator& lhs, const adjacency_iterator& rhs) {
+                    return *lhs == *rhs;
+                }
+
+                /**
+                 * <your documentation>
+                 */
+                friend bool operator != (const adjacency_iterator& lhs, const adjacency_iterator& rhs) {
+                    return !(lhs == rhs);}
+
+
+
+            private:
+                // ----
+                // data
+                // ----
+                // <your data>
+
+                Graph* _c;
+                size_type index;
+                vertex_descriptor _vd;
+
+            private:
+                // -----
+                // valid
+                // -----
+
+                bool valid () const {
+                    return index >= 0;}
+
+            public:
+                // -----------   
+                // constructor
+                // -----------
+
+                /**
+                 * <your documentation>
+                 */
+                adjacency_iterator (Graph* c, size_type i = 0, vertex_descriptor vd = 0) : _c(c), index(0), _vd(vd){
+
+                    index = i;
+
+                    _vd = vd;
+                    assert(valid());
+                }
+
+                // Default copy, destructor, and copy assignment.
+                // iterator (const iterator&);
+                // ~iterator ();
+                // iterator& operator = (const iterator&);
+
+                // ----------
+                // operator *
+                // ----------
+
+                /**
+                 * <your documentation>
+                 */
+                vertex_descriptor& operator * () const {                   
+                    return (*_c).graph[_vd][index];
+                }
+
+
+
+                // -----------
+                // operator ++
+                // -----------
+
+                /**
+                 * <your documentation>
+                 */
+                adjacency_iterator& operator ++ () {
+                    ++index;
+                    assert(valid());
+                    return *this;}
+
+                /**
+                 * <your documentation>
+                 */
+                adjacency_iterator operator ++ (int) {
+                    adjacency_iterator x = *this;
+                    ++(*this);
+                    assert(valid());
+                    return x;}
+
+
+
+                 /**
+                 * @param cosnt_iterator
+                 * @param value d
+                 * @return const_iterator reference
+                 * adds d to iterator
+                 */
+                adjacency_iterator& operator += (vertices_size_type d) {
+
+                    index += d;
+                    assert(valid());
+                    return *this;}
+
+     
+            };
+
+
+
         /**
          * <your documentation>
          */                                             //Ther ShOULD be a const version here!!!
@@ -600,7 +722,20 @@ class Graph {
         friend std::pair<edge_iterator, edge_iterator> edges (Graph& g) { // <------------
             edge_iterator b = g.edge_begin();
             edge_iterator e = g.edge_end();
-            return std::make_pair(b, e);}            
+            return std::make_pair(b, e);} 
+
+        // -----------------
+        // adjacent_vertices
+        // -----------------
+
+        /**
+         * <your documentation>
+         */
+        friend std::pair<adjacency_iterator, adjacency_iterator> adjacent_vertices (vertex_descriptor vd,  Graph& g) {
+            // vector<vertex_descriptor> m = g.graph[vd];
+            adjacency_iterator b = g.adjacency_begin(vd);
+            adjacency_iterator e = g.adjacency_end(vd);
+            return std::make_pair(b, e);}           
 
 
         /**
@@ -630,7 +765,23 @@ class Graph {
          */
         edge_iterator edge_end () {
             return edge_iterator(this, edges.size());
-        }    
+        }  
+
+
+
+                /**
+         * <your documentation>
+         */
+        adjacency_iterator adjacency_begin (vertex_descriptor& vd) {
+            return adjacency_iterator(this, 0, vd);
+        }
+
+        /**
+         * <your documentation>
+         */
+        adjacency_iterator adjacency_end (vertex_descriptor& vd) {
+            return adjacency_iterator(this, graph[vd].size(), vd);
+        }  
 
 
 
