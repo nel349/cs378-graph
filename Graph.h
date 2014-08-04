@@ -132,15 +132,15 @@ class Graph {
                     g.graph[a].push_back(b);
                 }
                 
-                if(g.graph.find(b) == g.graph.end()){
-                    g.graph[b] = {};
-                    g.graph[b].push_back(a);
+                // if(g.graph.find(b) == g.graph.end()){
+                //     g.graph[b] = {};
+                //     g.graph[b].push_back(a);
 
 
-                }
-                else{
-                    g.graph[b].push_back(a);
-                }
+                // }
+                // else{
+                //     g.graph[b].push_back(a);
+                // }
             }
             else{
                 std::pair<edge_descriptor, bool> found =edge(a, b, g); 
@@ -512,12 +512,14 @@ class Graph {
                  */
                 edge_descriptor operator * () const {
                     edge_descriptor r =0;
-                    size_type i =0;
+                    // size_type i =0;
                     auto it = (*_c).edges.begin();
-                    while(  i < index ){
-                        ++i;
-                        ++it;
-                    }
+
+                    advance(it, index);
+                    // while(  i < index ){
+                    //     ++i;
+                    //     ++it;
+                    // }
                     r= it->first;
                     return r;
                 }

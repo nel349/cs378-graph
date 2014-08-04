@@ -26,7 +26,7 @@ run: TestGraph
 	./TestGraph
 
 valgrind: TestGraph
-	-valgrind TestGraph
+	-valgrind ./TestGraph
 valg_cove:
 	-valgrind TestGraph
 	gcov-4.7 -b TestGraph.c++
