@@ -35,12 +35,8 @@ class Graph {
         // typedefs
         // --------
 
-        typedef int vertex_descriptor   ;  // fix!
-        typedef int edge_descriptor;    // fix!
-
-        // typedef int* vertex_iterator;    // fix!
-        // typedef int* edge_iterator;      // fix!
-        // typedef int* adjacency_iterator; // fix!
+        typedef int vertex_descriptor   ; 
+        typedef int edge_descriptor;   
 
         typedef std::size_t vertices_size_type;
         typedef std::size_t edges_size_type;
@@ -51,7 +47,6 @@ class Graph {
         // data
         // ----
 
-        // std::vector< std::vector<vertex_descriptor> > g; // something like this
 
         map< vertex_descriptor, vector<vertex_descriptor> > graph;
         map< vertices_size_type, vertex_descriptor> vertices; // vertices and its edges
@@ -59,7 +54,6 @@ class Graph {
         map< edge_descriptor, pair<vertex_descriptor, vertex_descriptor> > edges; // edges
 
         vertex_descriptor vid;
-        edge_descriptor eid;    
 
     public:
 
@@ -70,8 +64,6 @@ class Graph {
                 cout << " " << it->first << ":" << it->second;
         
             cout << endl;
-
-            // cout << "Is this failing" << endl;
 
         }
 
@@ -118,12 +110,8 @@ class Graph {
                 }
             }
             if(add_edge){
-                // ++g.eid;
-                // cout << 
                 
-                // cout << "this is ed:" << a* 10  + b << endl;
                 g.edges[ed] = make_pair(a,b);
-                // cout << "Added edge " << ed <<endl;
                 if(g.graph.find(a) == g.graph.end()){
                     g.graph[a] = {};
                     g.graph[a].push_back(b);
@@ -259,16 +247,6 @@ class Graph {
                 // --------
                 // typedefs
                 // --------
-
-                // typedef std::bidirectional_iterator_tag   iterator_category;
-                // typedef typename Graph::value_type      value_type;
-                // typedef typename Graph::difference_type difference_type;
-                // typedef typename &*vertex_descriptor               reference;
-                // typedef typename Graph::vertex_iterator                         reference;
-// 
-                // typedef typename Graph::vertex_iterator*                         pointer;
-
-                // typedef typename allocator_type::reference          reference;
                 typedef typename Graph::vertices_size_type           size_type;
 
             public:
@@ -436,14 +414,6 @@ class Graph {
                 // typedefs
                 // --------
 
-                // typedef std::bidirectional_iterator_tag   iterator_category;
-                // typedef typename Graph::value_type      value_type;
-                // typedef typename Graph::difference_type difference_type;
-                // typedef typename &*edge_descriptor               reference;
-                // typedef typename Graph::edge_iterator                         reference;
-// 
-                // typedef typename Graph::edge_iterator*                         pointer;
-
                 typedef typename Graph::edges_size_type           size_type;
 
             public:
@@ -580,14 +550,6 @@ class Graph {
                 // typedefs
                 // --------
 
-                // typedef std::bidirectional_iterator_tag   iterator_category;
-                // typedef typename Graph::value_type      value_type;
-                // typedef typename Graph::difference_type difference_type;
-                // typedef typename &*edge_descriptor               reference;
-                // typedef typename Graph::edge_iterator                         reference;
-// 
-                // typedef typename Graph::edge_iterator*                         pointer;
-
                 typedef typename Graph::vertices_size_type           size_type;
 
             public:
@@ -697,6 +659,30 @@ class Graph {
                     assert(valid());
                     return *this;}
 
+
+
+
+                // -----------
+                // operator --
+                // -----------
+
+                /**
+                 * <your documentation>
+                 */
+                adjacency_iterator& operator -- () {
+                    --index;
+                    assert(valid());
+                    return *this;}
+
+                /**
+                 * <your documentation>
+                 */
+                adjacency_iterator operator -- (int) {
+                    adjacency_iterator x = *this;
+                    --(*this);
+                    assert(valid());
+                    return x;}
+
      
             };
 
@@ -704,9 +690,8 @@ class Graph {
 
         /**
          * <your documentation>
-         */                                             //Ther ShOULD be a const version here!!!
-        friend std::pair<vertex_iterator, vertex_iterator> vertices ( Graph& g) {// <------------
-            // <your code>
+         */                                          
+        friend std::pair<vertex_iterator, vertex_iterator> vertices ( Graph& g) {
                 // dummy data
            
             vertex_iterator b = g.begin();
@@ -720,8 +705,8 @@ class Graph {
 
         /**
          * <your documentation>
-         */                                              //Ther ShOULD be a const version here!!!
-        friend std::pair<edge_iterator, edge_iterator> edges (Graph& g) { // <------------
+         */                                             
+        friend std::pair<edge_iterator, edge_iterator> edges (Graph& g) { 
             edge_iterator b = g.edge_begin();
             edge_iterator e = g.edge_end();
             return std::make_pair(b, e);} 
@@ -818,7 +803,7 @@ class Graph {
             edges={};
 
             vid = 0;
-            eid = 0;
+
 
             assert(valid());}
 
