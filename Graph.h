@@ -87,17 +87,16 @@ class Graph {
             }
         }
 
-         bool less_second(const pair<vertex_descriptor, vertex_descriptor>& a, const pair<vertex_descriptor, vertex_descriptor>& b){
-
-            return true;
-        }
-
         // --------
         // add_edge
         // --------
 
-        /**
-         * <your documentation>
+        /*
+        * @param a - vertex descriptor a
+        * @param b - vertex descriptor b
+        * @return std::pair<edge_descriptor, bool>
+         * Adds edge (u,v) to the graph and returns the edge descriptor for the new edge. For graphs that do 
+         * not allow parallel edges, if the edge is already in the graph then a duplicate will not be added and the bool flag will be false. When the flag is false, the returned edge descriptor points to the already existing edge.
          */
         friend std::pair<edge_descriptor, bool> add_edge (vertex_descriptor a, vertex_descriptor b, Graph& g) {
 
@@ -147,8 +146,10 @@ class Graph {
         // add_vertex
         // ----------
 
-        /**
-         * <your documentation>
+        /*
+         * @param g - Graph g
+         * @return vertex_descriptor
+         * returns the vertex_descriptor of the added vertex
          */
         friend vertex_descriptor add_vertex (Graph& g) {
             g.vertices[(vertices_size_type)g.vid] = g.vid;
@@ -163,7 +164,12 @@ class Graph {
         // ----
 
         /**
-         * <your documentation>
+         * @param a - vertex descriptor a of an edge
+         * @param b - vertex descriptor b of an edge
+         * @param g - vAdjacency list
+         * @return bool
+         * If an edge from vertex a to vertex b exists, return a pair containing one such edge and true. 
+         * If there are no edges between a and b, return a pair with an arbitrary edge descriptor and false.
          */
         friend std::pair<edge_descriptor, bool> edge (vertex_descriptor a, vertex_descriptor b, const Graph& g) {
             bool            exist  = false;
@@ -186,7 +192,9 @@ class Graph {
         // ---------
 
         /**
-         * <your documentation>
+         *@param g - Adjacency list
+         *@return edges_size_type
+         *Returns the number of edges in the graph g.
          */
         friend edges_size_type num_edges (const Graph& g) {
             edges_size_type s = (edges_size_type) g.edges.size() ; 
@@ -197,7 +205,9 @@ class Graph {
         // ------------
 
         /**
-         * <your documentation>
+         *@param g - Adjacency list
+         *@return vertex_size_type                     
+         * Returns the number of vertices in the graph g.
          */
         friend vertices_size_type num_vertices (const Graph& g) {
             vertices_size_type s = g.vertices.size(); 
@@ -208,7 +218,10 @@ class Graph {
         // ------
 
         /**
-         * <your documentation>
+         * @param ed - edge_descriptor
+         * @param g - Adjacency list
+         * @return vertex_descriptor
+         * Returns the source vertex of edge ed.
          */
         friend vertex_descriptor source (edge_descriptor ed, const Graph& g) {
             vertex_descriptor v =  g.edges.at(ed).first; 
@@ -219,7 +232,10 @@ class Graph {
         // ------
 
         /**
-         * <your documentation>
+         * @param ed - edge_descriptor
+         * @param g - Adjacency list
+         * @return vertex_descriptor
+         * Returns the target vertex of edge ed.
          */
         friend vertex_descriptor target (edge_descriptor ed, const Graph& g) {
 
@@ -231,7 +247,9 @@ class Graph {
         // ------
 
         /**
-         * <your documentation>
+         * @param n - nth vertex 
+         * @return vertex_descriptor
+         * Returns the nth vertex in the graph's vertex list
          */
         friend vertex_descriptor vertex (vertices_size_type n, const Graph& g) {
             auto it_vd = g.vertices.find(n);
@@ -255,14 +273,20 @@ class Graph {
                 // -----------
 
                 /**
-                 * <your documentation>
+                 * @param lhs - constant iterator left hand side of operation
+                 * @param rhs - constant iterator right hand side of operation
+                 * @return bool
+                 * returns whether two iterators iterate over same container
                  */
                 friend bool operator == (const vertex_iterator& lhs, const vertex_iterator& rhs) {
                     return *lhs == *rhs;
                 }
 
                 /**
-                 * <your documentation>
+                 * @param lhs - constant iterator left hand side of operation
+                 * @param rhs - constant iterator right hand side of operation
+                 * @return bool
+                 * returns whether two iterators don't iterate over same things uses ==
                  */
                 friend bool operator != (const vertex_iterator& lhs, const vertex_iterator& rhs) {
                     return !(lhs == rhs);}
@@ -292,7 +316,9 @@ class Graph {
                 // -----------
 
                 /**
-                 * <your documentation>
+                 * @param Graph _c
+                 * @param index i
+                 * construct a const_iterator for _c starting at i
                  */
                 vertex_iterator (Graph* c, size_type i = 0) : _c(c), index(0){
 
@@ -311,7 +337,9 @@ class Graph {
                 // ----------
 
                 /**
-                 * <your documentation>
+                 * @param const_iterator
+                 * @return reference - vertex_descriptor&
+                 * dereferences const_iterator
                  */
                 vertex_descriptor& operator * () const {
                     return (*_c).vertices[index];}
@@ -320,8 +348,10 @@ class Graph {
                 // operator ->
                 // -----------
 
-                /**
-                 * <your documentation>
+                 /**
+                 * @param const_iterator
+                 * @return pointer - vertex_descriptor*
+                 * dereferences const_iterator
                  */
                 vertex_descriptor* operator -> () const {
                     return &**this;}
@@ -329,9 +359,10 @@ class Graph {
                 // -----------
                 // operator ++
                 // -----------
-
                 /**
-                 * <your documentation>
+                 * @param const_iterator
+                 * @return const_iterator reference
+                 * pre-increments const_iterator
                  */
                 vertex_iterator& operator ++ () {
                     // ++(*this);
@@ -340,7 +371,9 @@ class Graph {
                     return *this;}
 
                 /**
-                 * <your documentation>
+                 * @param const_iterator
+                 * @return const_iterator reference
+                 * post-increments const_iterator
                  */
                 vertex_iterator operator ++ (int) {
                     vertex_iterator x = *this;
@@ -353,16 +386,19 @@ class Graph {
                 // -----------
 
                 /**
-                 * <your documentation>
+                 * @param const_iterator
+                 * @return const_iterator reference
+                 * pre-decrement const_iterator
                  */
                 vertex_iterator& operator -- () {
                 //     // --(*this);
                     --index;
                     assert(valid());
                     return *this;}
-
                 /**
-                 * <your documentation>
+                 * @param const_iterator
+                 * @return const_iterator reference
+                 * post-decrements const_iterator
                  */
                 vertex_iterator operator -- (int) {
                     vertex_iterator x = *this;
