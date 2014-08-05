@@ -273,8 +273,8 @@ class Graph {
                 // -----------
 
                 /**
-                 * @param lhs - constant iterator left hand side of operation
-                 * @param rhs - constant iterator right hand side of operation
+                 * @param lhs - vertex_iterator left hand side of operation
+                 * @param rhs - vertex_iterator right hand side of operation
                  * @return bool
                  * returns whether two iterators iterate over same container
                  */
@@ -283,8 +283,8 @@ class Graph {
                 }
 
                 /**
-                 * @param lhs - constant iterator left hand side of operation
-                 * @param rhs - constant iterator right hand side of operation
+                 * @param lhs - vertex_iterator left hand side of operation
+                 * @param rhs - vertex_iterator right hand side of operation
                  * @return bool
                  * returns whether two iterators don't iterate over same things uses ==
                  */
@@ -318,7 +318,7 @@ class Graph {
                 /**
                  * @param Graph _c
                  * @param index i
-                 * construct a const_iterator for _c starting at i
+                 * construct a vertex_iterator for _c starting at i
                  */
                 vertex_iterator (Graph* c, size_type i = 0) : _c(c), index(0){
 
@@ -337,9 +337,9 @@ class Graph {
                 // ----------
 
                 /**
-                 * @param const_iterator
+                 * @param vertex_iterator
                  * @return reference - vertex_descriptor&
-                 * dereferences const_iterator
+                 * dereferences vertex_iterator
                  */
                 vertex_descriptor& operator * () const {
                     return (*_c).vertices[index];}
@@ -349,9 +349,9 @@ class Graph {
                 // -----------
 
                  /**
-                 * @param const_iterator
+                 * @param vertex_iterator
                  * @return pointer - vertex_descriptor*
-                 * dereferences const_iterator
+                 * dereferences vertex_iterator
                  */
                 vertex_descriptor* operator -> () const {
                     return &**this;}
@@ -360,9 +360,9 @@ class Graph {
                 // operator ++
                 // -----------
                 /**
-                 * @param const_iterator
-                 * @return const_iterator reference
-                 * pre-increments const_iterator
+                 * @param vertex_iterator
+                 * @return vertex_iterator reference
+                 * pre-increments vertex_iterator
                  */
                 vertex_iterator& operator ++ () {
                     // ++(*this);
@@ -371,9 +371,9 @@ class Graph {
                     return *this;}
 
                 /**
-                 * @param const_iterator
-                 * @return const_iterator reference
-                 * post-increments const_iterator
+                 * @param vertex_iterator
+                 * @return vertex_iterator reference
+                 * post-increments vertex_iterator
                  */
                 vertex_iterator operator ++ (int) {
                     vertex_iterator x = *this;
@@ -386,9 +386,9 @@ class Graph {
                 // -----------
 
                 /**
-                 * @param const_iterator
-                 * @return const_iterator reference
-                 * pre-decrement const_iterator
+                 * @param vertex_iterator
+                 * @return vertex_iterator reference
+                 * pre-decrement vertex_iterator
                  */
                 vertex_iterator& operator -- () {
                 //     // --(*this);
@@ -396,9 +396,9 @@ class Graph {
                     assert(valid());
                     return *this;}
                 /**
-                 * @param const_iterator
-                 * @return const_iterator reference
-                 * post-decrements const_iterator
+                 * @param vertex_iterator
+                 * @return vertex_iterator reference
+                 * post-decrements vertex_iterator
                  */
                 vertex_iterator operator -- (int) {
                     vertex_iterator x = *this;
@@ -408,9 +408,9 @@ class Graph {
 
 
                  /**
-                 * @param cosnt_iterator
+                 * @param vertex_iterator
                  * @param value d
-                 * @return const_iterator reference
+                 * @return vertex_iterator reference
                  * adds d to iterator
                  */
                 vertex_iterator& operator += (vertices_size_type d) {
@@ -424,9 +424,9 @@ class Graph {
                 // -----------
 
                 /**
-                 * @param const_iterator
+                 * @param vertex_iterator
                  * @param value d
-                 * @return const_iterator reference
+                 * @return vertex_iterator reference
                  * subtracts d from iterator
                  */
                 vertex_iterator& operator -= (vertices_size_type d) {
@@ -458,14 +458,20 @@ class Graph {
                 // -----------
 
                 /**
-                 * <your documentation>
+                 * @param lhs - edge iterator left hand side of operation
+                 * @param rhs - edge iterator right hand side of operation
+                 * @return bool
+                 * returns whether two iterators iterate over same container
                  */
                 friend bool operator == (const edge_iterator& lhs, const edge_iterator& rhs) {
                     return *lhs == *rhs;
                 }
 
                 /**
-                 * <your documentation>
+                 * @param lhs - edge iterator left hand side of operation
+                 * @param rhs - edge iterator right hand side of operation
+                 * @return bool
+                 * returns whether two iterators don't iterate over same things uses ==
                  */
                 friend bool operator != (const edge_iterator& lhs, const edge_iterator& rhs) {
                     return !(lhs == rhs);}
@@ -495,7 +501,9 @@ class Graph {
                 // -----------
 
                 /**
-                 * <your documentation>
+                 * @param Graph _c
+                 * @param index i
+                 * construct a edge_iterator for _c starting at i
                  */
                 edge_iterator (Graph* c, size_type i = 0) : _c(c), index(0){
 
@@ -505,27 +513,23 @@ class Graph {
                 }
 
                 // Default copy, destructor, and copy assignment.
-                // iterator (const iterator&);
+                // iterator (edge iterator&);
                 // ~iterator ();
-                // iterator& operator = (const iterator&);
+                // iterator& operator = (edge iterator&);
 
                 // ----------
                 // operator *
                 // ----------
 
                 /**
-                 * <your documentation>
+                 * @param edge_iterator
+                 * @return edge_descriptor
+                 * dereferences edge_iterator
                  */
                 edge_descriptor operator * () const {
                     edge_descriptor r =0;
-                    // size_type i =0;
                     auto it = (*_c).edges.begin();
-
                     advance(it, index);
-                    // while(  i < index ){
-                    //     ++i;
-                    //     ++it;
-                    // }
                     r= it->first;
                     return r;
                 }
@@ -537,7 +541,9 @@ class Graph {
                 // -----------
 
                 /**
-                 * <your documentation>
+                 * @param edge_iterator
+                 * @return edge_iterator reference
+                 * pre-increments edge_iterator
                  */
                 edge_iterator& operator ++ () {
                     ++index;
@@ -545,7 +551,9 @@ class Graph {
                     return *this;}
 
                 /**
-                 * <your documentation>
+                 * @param edge_iterator
+                 * @return edge_iterator reference
+                 * post-increments edge_iterator
                  */
                 edge_iterator operator ++ (int) {
                     edge_iterator x = *this;
@@ -556,10 +564,10 @@ class Graph {
 
 
                  /**
-                 * @param cosnt_iterator
+                 * @param edge_iterator
                  * @param value d
-                 * @return const_iterator reference
-                 * adds d to iterator
+                 * @return edge_iterator reference
+                 * adds d to edge_iterator
                  */
                 edge_iterator& operator += (edges_size_type d) {
 
@@ -594,14 +602,20 @@ class Graph {
                 // -----------
 
                 /**
-                 * <your documentation>
+                 * @param lhs - constant iterator left hand side of operation
+                 * @param rhs - constant iterator right hand side of operation
+                 * @return bool
+                 * returns whether two iterators iterate over same container
                  */
                 friend bool operator == (const adjacency_iterator& lhs, const adjacency_iterator& rhs) {
                     return lhs._c == rhs._c && lhs.index == rhs.index && lhs._vd == rhs._vd;
                 }
 
                 /**
-                 * <your documentation>
+                 * @param lhs - constant iterator left hand side of operation
+                 * @param rhs - constant iterator right hand side of operation
+                 * @return bool
+                 * returns whether two iterators don't iterate over same things uses ==
                  */
                 friend bool operator != (const adjacency_iterator& lhs, const adjacency_iterator& rhs) {
                     return !(lhs == rhs);}
@@ -632,7 +646,10 @@ class Graph {
                 // -----------
 
                 /**
-                 * <your documentation>
+                 * @param Graph _c
+                 * @param index i
+                 * @param index vd
+                 * construct a adjacency_iterator for _c starting at vd starting at i
                  */
                 adjacency_iterator (Graph* c, size_type i = 0, vertex_descriptor vd = 0) : _c(c), index(0), _vd(vd){
 
@@ -652,7 +669,9 @@ class Graph {
                 // ----------
 
                 /**
-                 * <your documentation>
+                 * @param adjacency_iterator
+                 * @return vertex_descriptor
+                 * dereferences adjacency_iterator
                  */
                 vertex_descriptor& operator * () const {                   
                     return (*_c).graph[_vd][index];
@@ -665,15 +684,19 @@ class Graph {
                 // -----------
 
                 /**
-                 * <your documentation>
+                 * @param adjacency_iterator
+                 * @return adjacency_iterator reference
+                 * pre-increments adjacency_iterator
                  */
                 adjacency_iterator& operator ++ () {
                     ++index;
                     assert(valid());
                     return *this;}
 
-                /**
-                 * <your documentation>
+                 /**
+                 * @param adjacency_iterator
+                 * @return adjacency_iterator reference
+                 * post-increments adjacency_iterator
                  */
                 adjacency_iterator operator ++ (int) {
                     adjacency_iterator x = *this;
@@ -684,10 +707,10 @@ class Graph {
 
 
                  /**
-                 * @param cosnt_iterator
+                 * @param adjacency_iterator
                  * @param value d
-                 * @return const_iterator reference
-                 * adds d to iterator
+                 * @return adjacency_iterator reference
+                 * adds d to adjacency_iterator
                  */
                 adjacency_iterator& operator += (vertices_size_type d) {
 
@@ -702,16 +725,20 @@ class Graph {
                 // operator --
                 // -----------
 
-                /**
-                 * <your documentation>
+                 /**
+                 * @param adjacency_iterator
+                 * @return adjacency_iterator reference
+                 * pre-decrement adjacency_iterator
                  */
                 adjacency_iterator& operator -- () {
                     --index;
                     assert(valid());
                     return *this;}
 
-                /**
-                 * <your documentation>
+                 /**
+                 * @param adjacency_iterator
+                 * @return adjacency_iterator reference
+                 * post-decrement adjacency_iterator
                  */
                 adjacency_iterator operator -- (int) {
                     adjacency_iterator x = *this;
@@ -725,7 +752,9 @@ class Graph {
 
 
         /**
-         * <your documentation>
+         * @param g - Adjacency list
+         * @return std::pair<vertex_iterator, vertex_iterator>
+         * Returns an iterator-range providing access to the vertex set of graph g.
          */                                          
         friend std::pair<vertex_iterator, vertex_iterator> vertices ( Graph& g) {
                 // dummy data
@@ -740,8 +769,10 @@ class Graph {
         // -----
 
         /**
-         * <your documentation>
-         */                                             
+         * @param g - Adjacency list
+         * @return std::pair<edge_iterator, edge_iterator>
+         * Returns an iterator-range providing access to the edge set of graph g.
+         */                                              
         friend std::pair<edge_iterator, edge_iterator> edges (Graph& g) { 
             edge_iterator b = g.edge_begin();
             edge_iterator e = g.edge_end();
@@ -752,7 +783,11 @@ class Graph {
         // -----------------
 
         /**
-         * <your documentation>
+         * @param vd - Vertex descriptor
+         * @param g - Adjacency list
+         *
+         *Returns an iterator-range providing access to the vertices in graph g to which vd is adjacent. (inv is for inverse.) 
+         *For example, if v -> vd is an edge in the graph, then v will be in this iterator range. This function is only available for bidirectional and undirected
          */
         friend std::pair<adjacency_iterator, adjacency_iterator> adjacent_vertices (vertex_descriptor vd,  Graph& g) {
             // vector<vertex_descriptor> m = g.graph[vd];
@@ -762,14 +797,18 @@ class Graph {
 
 
         /**
-         * <your documentation>
+         * @param this
+         * @return vertex_iterator
+         * returns vertex_iterator pointing to first object in vertices
          */
         vertex_iterator begin () {
             return vertex_iterator(this, 0);
         }
 
         /**
-         * <your documentation>
+         * @param this
+         * @return vertex_iterator
+         * returns vertex_iterator to one index past the last element in vertices
          */
         vertex_iterator end () {
             return vertex_iterator(this, vertices.size());
@@ -777,14 +816,18 @@ class Graph {
 
 
         /**
-         * <your documentation>
+         * @param this
+         * @return edge_iterator
+         * returns edge_iterator pointing to first object in the edge set
          */
         edge_iterator edge_begin () {
             return edge_iterator(this, 0);
         }
 
         /**
-         * <your documentation>
+         * @param this
+         * @return edge_iterator
+         * returns edge_iterator to one index past the last element in the edges set
          */
         edge_iterator edge_end () {
             return edge_iterator(this, edges.size());
@@ -792,15 +835,21 @@ class Graph {
 
 
 
-                /**
-         * <your documentation>
+        /**
+         * @param this
+         * @param vd - vertex descriptor
+         * @return adjacency_iterator
+         * returns adjacency_iterator pointing to first object adjacent to the vertex vd
          */
         adjacency_iterator adjacency_begin (vertex_descriptor& vd) {
             return adjacency_iterator(this, 0, vd);
         }
 
         /**
-         * <your documentation>
+         * @param this
+         * @param vd - vertex descriptor
+         * @return adjacency_iterator
+         * returns adjacency_iterator to one index past the last element in the set of vertices adjacent to vd
          */
         adjacency_iterator adjacency_end (vertex_descriptor& vd) {
             return adjacency_iterator(this, graph[vd].size(), vd);
@@ -830,7 +879,7 @@ class Graph {
         // ------------
 
         /**
-         * <your documentation>
+         * Constructs and empty graph with empty sets vertices and edges.
          */
         Graph () {
 
