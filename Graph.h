@@ -136,7 +136,7 @@ class Graph {
             }
             // sort(g.edges.begin(), g.edges.end(), less_second);
 
-
+            sort(g.graph[a].begin(),g.graph[a].end());
             return std::make_pair(ed, add_edge);
         }
 
