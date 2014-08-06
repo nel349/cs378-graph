@@ -6,7 +6,7 @@ clean:
 	rm -f  *.gcov
 	rm -f  Graph.log
 	rm -f  TestGraph
-	rm -rf html
+
 
 config:
 	doxygen -g
