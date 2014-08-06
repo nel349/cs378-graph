@@ -746,6 +746,24 @@ class Graph {
                     assert(valid());
                     return x;}
 
+
+
+                // -----------
+                // operator -=
+                // -----------
+
+                /**
+                 * @param adjacency_iterator
+                 * @param value d
+                 * @return adjacency_iterator reference
+                 * subtracts d from adjacency_iterator
+                 */
+                adjacency_iterator& operator -= (vertices_size_type d) {
+                    index -= d;
+                    assert(valid());
+                    return *this;
+                }
+
      
             };
 
