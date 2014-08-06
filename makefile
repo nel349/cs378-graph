@@ -27,8 +27,6 @@ run: TestGraph
 
 valgrind: TestGraph
 	-valgrind ./TestGraph
-valg_cove:
-	-valgrind TestGraph
+coverage: run
 	gcov-4.7 -b TestGraph.c++
-	cat  TestGraph.c++.gcov
 

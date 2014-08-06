@@ -1,0 +1,113 @@
+commit 4f0f1af8876a46a5b4a44c27fce5809fccab12b5
+Author: Norman Lopez <nel349@cs.utexas.edu>
+Date:   Wed Aug 6 12:51:38 2014 -0500
+
+     Added more test
+
+commit baf1a3f54f455001775391c206c3787113fd67ca
+Author: Norman Lopez <nel349@cs.utexas.edu>
+Date:   Tue Aug 5 18:38:37 2014 -0500
+
+    Documentation done
+
+commit f4a145fbdc9d1d347fea7279635a42f27ea90c73
+Author: Norman <noell_LPZ@yahoo.com>
+Date:   Tue Aug 5 15:50:22 2014 -0500
+
+     Halfway through Documentation
+
+commit 983514a901ca1ddd732c8a28c71b06273005a205
+Author: Norman <noell_LPZ@yahoo.com>
+Date:   Tue Aug 5 15:10:12 2014 -0500
+
+    Fixed issue #24
+
+commit 37bc9adb45fcb71cd77a8b4e4ba4547230eceaa2
+Author: Norman Lopez <nel349@cs.utexas.edu>
+Date:   Tue Aug 5 14:04:33 2014 -0500
+
+    need to sort the vector adjacent
+
+commit 8bf6d417013e57fc374bbbcae94bc11b5c44a772
+Author: Norman <noell_LPZ@yahoo.com>
+Date:   Mon Aug 4 18:11:57 2014 -0500
+
+     fixed valgrind, Almost done, need documentation #23
+
+commit 1ef728d262e167fef232464a6932ed34fcc7a696
+Author: Norman <noell_LPZ@yahoo.com>
+Date:   Mon Aug 4 17:48:20 2014 -0500
+
+    Almost done. Fix Valgrindgit add .! #23
+
+commit 7194fd3d7d6e64d4ea282d34b893c567938ce6b0
+Author: Norman <noell_LPZ@yahoo.com>
+Date:   Mon Aug 4 17:21:31 2014 -0500
+
+    Implmented adjacency_vertices #21
+
+commit 8fcf42d420580089399d9492c693598e04a79938
+Author: Norman Lopez <nel349@cs.utexas.edu>
+Date:   Sun Aug 3 22:24:55 2014 -0500
+
+    Fixed edge iterator order
+
+commit da4fe5eabc46f3060e57a55b1f9cbf4eda8233f4
+Author: Norman <noell_LPZ@yahoo.com>
+Date:   Fri Aug 1 23:40:57 2014 -0500
+
+    Implemented target and source #19 #20
+
+commit 4d2b93b8a674fa840488d64581eae99878e4bd13
+Author: Norman Lopez <nel349@cs.utexas.edu>
+Date:   Fri Aug 1 17:33:48 2014 -0500
+
+    Updated add_edges, finds existing edge
+
+commit 0e5ed9467d6da71e7c344e6584c6f0183ad6233a
+Author: Norman Lopez <nel349@cs.utexas.edu>
+Date:   Fri Aug 1 17:21:28 2014 -0500
+
+     Finished edges iterator #18
+
+commit c31752ef520af73ed8c18f4d1208776241caf5f6
+Author: Norman <noell_LPZ@yahoo.com>
+Date:   Thu Jul 31 21:59:44 2014 -0500
+
+    Implemented vertex iterator #17
+
+commit 6e75af14acad27046a492a7089671d85f0f09ef2
+Author: Norman <noell_LPZ@yahoo.com>
+Date:   Thu Jul 31 15:24:05 2014 -0500
+
+    Implementing add edge #15
+
+commit b63dc599a5b959563c1679343b737f367a1b055a
+Author: Norman <noell_LPZ@yahoo.com>
+Date:   Thu Jul 31 01:26:41 2014 -0500
+
+    Small modifications to Tests
+
+commit 8bf467e5afdbcbeeb7cf14d2d8c37011a7bae541
+Author: Norman Lopez <nel349@cs.utexas.edu>
+Date:   Wed Jul 30 22:15:04 2014 -0500
+
+    Implemented graph constructor, add_vertex, vertex #13 #14
+
+commit a4207e9ad03a3ca397a8c5f1917870a4a8f65e72
+Author: Norman Lopez <nel349@cs.utexas.edu>
+Date:   Wed Jul 30 16:08:34 2014 -0500
+
+     Initial Setup
+
+commit 044ea359fcb368c666d89e0d6e029c87f6205f20
+Author: nel349 <noell.lpz@utexas.edu>
+Date:   Wed Jul 30 15:54:06 2014 -0500
+
+    Update .gitignore
+
+commit 12815cd544c2a54e06fb3654bde9604ba4847fe2
+Author: nel349 <noell.lpz@utexas.edu>
+Date:   Wed Jul 30 15:53:05 2014 -0500
+
+    Initial commit
