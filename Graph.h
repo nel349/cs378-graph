@@ -74,8 +74,7 @@ public:
 		edge_descriptor ed = (edge_descriptor)10 * a  + b;
 		bool            add_edge  = true;
 		for ( auto it = g.edges.begin(); it != g.edges.end(); ++it ){
-			if( (it->second.first  == a && it->second.second == b) ||
-					(it->second.first  == b && it->second.second == a) )  {
+			if( (it->second.first  == a && it->second.second == b)  )  {
 				add_edge= false;
 			}
 		}
@@ -211,9 +210,17 @@ public:
 	 * @return vertex_descriptor
 	 * Returns the nth vertex in the graph's vertex list
 	 */
-	friend vertex_descriptor vertex (vertices_size_type n, const Graph& g) {
+	friend vertex_descriptor vertex (vertices_size_type n,  Graph& g) {
+
 		auto it_vd = g.vertices.find(n);
-		vertex_descriptor vd = it_vd -> second; 
+		vertex_descriptor vd = n ;
+		if(it_vd == g.vertices.end()){
+			g.vertices[n]= vd;
+		}
+		else{
+			vd = it_vd -> second; 
+
+		}
 		return vd;}
 
 	// --------
